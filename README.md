@@ -27,8 +27,11 @@ dags_folder = <PATH>
 이후, `airflow standalone` 으로 에어플로우 서버를 재시작할 시 DAG들은 해당 레포지토리에서부터 읽어지게 됩니다.
 
 ## DAGs 별 기능
-- `extract1.py`, `extract2.py`, `extract3.py`: 영화 박스오피스 데이터의 수집(Extraction)을 위한 DAG 파일들로, 공통적으로 `extract_package` 패키지를 사용합니다. 각각의 파일은 2023년을 3개 분기로 나누어 1 - 4월, 5 - 8월, 9 - 12월의 데이터를 각각 수집합니다. 
+- `extract1.py`, `extract2.py`, `extract3.py`
+ : 영화 박스오피스 데이터의 수집을 위한 DAG 파일들로, 공통적으로 `extract_package` 패키지를 사용합니다. 각각의 파일은 2023년을 3개 분기로 나누어 1 - 4월, 5 - 8월, 9 - 12월의 데이터를 각각 수집해 지정된 경로에 일차적으로 저장합니다. 
 
-- `transform1.py`, `transform2.py`, `transform3.py`: 직전 3개 DAG에서 수집한 데이터들을 가공하는 DAG들로,  공통적으로 `transform_package` 패키지를 사용합니다. 데이터들은 `extract` DAG들이 각각  나누어 저장한 것을 그대로 이용합니다. 
+- `transform1.py`, `transform2.py`, `transform3.py`
+ : 직전 3개 DAG에서 수집한 데이터들을 가공해 다시 저장하는 DAG들로, 공통적으로 `transform_package` 패키지를 사용합니다. 데이터들은 `extract` DAG들이 각각  나누어 저장한 것을 그대로 이용합니다. 
 
-- `load1.py`, `load2.py`, `load3.py`: `transform` DAG에서 처리한 데이터를 행을 구별해 `parquet` 형식으로 최종적으로 저장하는 DAG입니다. 공통적으로 `load_package` 패키지를 사용합니다.
+- `load1.py`, `load2.py`, `load3.py`
+: `transform` DAG에서 처리한 데이터를 행을 구별해 `parquet` 형식으로 최종적으로 저장하는 DAG입니다. 공통적으로 `load_package` 패키지를 사용합니다.
