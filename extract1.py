@@ -1,5 +1,5 @@
 # extract1.py DAGS
-
+# coded by Sehyeon
 from datetime import datetime, timedelta
 from textwrap import dedent
 from pprint import pprint
@@ -14,6 +14,13 @@ from airflow.operators.python import (
     BranchPythonOperator,
     is_venv_installed,
 )
+
+REQUIREMENTS = [
+    "git+https://github.com/LeeChungBae/Extract_package.git@dev/d1.0.0",
+    "git+https://github.com/LeeChungBae/Transform_package.git@dev/d1.0.0",
+    "git+https://github.com/LeeChungBae/Load_package.git@dev/d1.0.0"
+]
+
 with DAG(
         'extract1',
     default_args={
@@ -28,9 +35,20 @@ with DAG(
     tags=['api', 'movie', 'amt'],
 ) as dag:
 
+# functions
+    def ext1():
+        from extract_package.ice_breaking import ice_breaking
+        ice_breaking()
+
+# tasks
     start = EmptyOperator(task_id = 'start')
     end = EmptyOperator(task_id = 'end')
 
-    extract1 = EmptyOperator(task_id = 'extract1')
+    extract1 = PythonVirtualenvOperator(
+        task_id = 'extract1',
+        python_callable = ext1,
+        system_site_packages = False,
+        requirements = REQUIREMENTS[0],
+    )
 
 start >> extract1 >> end
