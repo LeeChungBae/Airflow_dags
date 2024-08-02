@@ -14,13 +14,13 @@ $ git clone git@github.com:LeeChungBae/Airflow_dags.git
 $ cd <CLONED_REPOSITORY>
 $ pwd
 ```
-이 때 출력된 해당 절대 경로를 \<PATH\> 라 할 때, AIRFLOW HOME 디렉토리의 airflow.cfg 파일을 다음과  같이 수정합니다.
+이 때 출력된 해당 절대 경로를 `\<PATH\>` 라 할 때, `AIRFLOW HOME` 디렉토리의 `airflow.cfg` 파일의 `dags_folder` 값을  다음과 같이 수정합니다.
 ```bash
 # Variable: AIRFLOW__CORE__DAGS_FOLDER
 #
 dags_folder = <PATH>
 ```
-이후, airflow standalone 으로 서버를 재시작할 시 DAG 들은 해당 레포지토리에서부터 읽어지게 됩니다.
+이후, airflow standalone 으로 에어플로우 서버를 재시작할 시 DAG들은 해당 레포지토리에서부터 읽어지게 됩니다.
 
 # DAGs 별 기능
 ## extract1, extract2, extract3
