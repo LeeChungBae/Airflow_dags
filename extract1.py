@@ -37,8 +37,12 @@ with DAG(
 
 # functions
     def ext1():
+        pass
+
+    def icebreak():
         from extract_package.ice_breaking import ice_breaking
         ice_breaking()
+
 
 # tasks
     start = EmptyOperator(task_id = 'start')
@@ -51,4 +55,12 @@ with DAG(
         requirements = REQUIREMENTS[0],
     )
 
-start >> extract1 >> end
+    icebreaking = PythonVirtualenvOperator(
+        task_id = 'icebreaking',
+        python_callable = icebreak,
+        system_site_packages = False,
+        requirements = REQUIREMENTS[0],
+        trigger_rule = 'all_done'
+    }
+
+start >> extract1 >> icebreaking >> end
