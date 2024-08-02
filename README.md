@@ -35,3 +35,5 @@ dags_folder = <PATH>
 
 - `load1.py`, `load2.py`, `load3.py`
 : `transform` DAG에서 처리한 데이터를 행을 구별해 `parquet` 형식으로 최종적으로 저장하는 DAG입니다. 공통적으로 `load_package` 패키지를 사용합니다.
+
+- `ice_breaking()`: DAGs가 작동하는지 확인하기 위해 넣은 디버깅 겸 이스터에그 함수입니다. 모든 DAGs는 최종적으로 종료하기 전에 본 함수를 불러 프로젝트 멤버들의 정면사진을 ASCII 아트 방식으로 로그에 출력합니다. 해당 함수는 `extract_package` 패키지에 속해 있습니다.
