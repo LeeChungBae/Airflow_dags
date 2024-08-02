@@ -14,6 +14,14 @@ from airflow.operators.python import (
     BranchPythonOperator,
     is_venv_installed,
 )
+
+REQUIREMENTS = [
+    "git+https://github.com/LeeChungBae/Extract_package.git@dev/d1.0.0",
+    "git+https://github.com/LeeChungBae/Load_package.git@dev/d1.0.0",
+    "git+https://github.com/LeeChungBae/Transform_package.git@dev/d1.0.0",
+]
+    
+
 with DAG(
         'extract3',
     default_args={
@@ -23,14 +31,26 @@ with DAG(
     },
     description='movie DAG',
     schedule="10 2 * * *",
-    start_date=datetime(2024, 7, 25),
+    start_date=datetime(2024, 8, 1),
     catchup=True,
     tags=['api', 'movie', 'amt'],
 ) as dag:
 
+# func
+    def extract_data():
+        from  extract_package.ice_breaking import ice_breaking
+        ice_breaking()
+
+
+# tasks
+    extract3 = PythonVirtualenvOperator(
+         task_id = 'extract3',
+         python_callable=extract_data,
+         requirements=REQUIREMENTS[0],
+         system_site_packages=False,
+    )
+
     start = EmptyOperator(task_id = 'start')
     end = EmptyOperator(task_id = 'end')
 
-    extract3 = EmptyOperator(task_id = 'extract3')
-
-start >> extract3 >> end
+    start >> extract3 >> end
