@@ -37,15 +37,24 @@ with DAG(
 ) as dag:
 
 # func
-    def extract_data():
+    def extract():
+        pass
+
+    def icebreak():
         from  extract_package.ice_breaking import ice_breaking
         ice_breaking()
-
 
 # tasks
     extract3 = PythonVirtualenvOperator(
          task_id = 'extract3',
-         python_callable=extract_data,
+         python_callable=extract,
+         requirements=REQUIREMENTS[0],
+         system_site_packages=False,
+    )
+
+    icebreaking = PythonVirtualenvOperator(
+         task_id = 'icebreaking',
+         python_callable=icebreak,
          requirements=REQUIREMENTS[0],
          system_site_packages=False,
     )
@@ -53,4 +62,4 @@ with DAG(
     start = EmptyOperator(task_id = 'start')
     end = EmptyOperator(task_id = 'end')
 
-    start >> extract3 >> end
+    start >> extract3 >> icebreaking >> end

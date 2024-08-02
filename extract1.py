@@ -36,7 +36,7 @@ with DAG(
 ) as dag:
 
 # functions
-    def ext1():
+    def extract():
         pass
 
     def icebreak():
@@ -50,7 +50,7 @@ with DAG(
 
     extract1 = PythonVirtualenvOperator(
         task_id = 'extract1',
-        python_callable = ext1,
+        python_callable = extract,
         system_site_packages = False,
         requirements = REQUIREMENTS[0],
     )
@@ -61,6 +61,6 @@ with DAG(
         system_site_packages = False,
         requirements = REQUIREMENTS[0],
         trigger_rule = 'all_done'
-    }
+    )
 
 start >> extract1 >> icebreaking >> end

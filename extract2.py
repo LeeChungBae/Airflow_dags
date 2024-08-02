@@ -33,20 +33,29 @@ with DAG(
     tags=['api', 'movie', 'amt'],
 ) as dag:
     
-    def ex2():
+    def extract():
+        pass
+
+    def icebreak():
         from extract_package.ice_breaking import ice_breaking
-        ice_breaking()
-        
-        
+        ice_breaking()    
 
     start = EmptyOperator(task_id = 'start')
     end = EmptyOperator(task_id = 'end')
 
     extract2 = PythonVirtualenvOperator(
         task_id = 'extract2',
-        python_callable = ex2,
+        python_callable = extract,
         system_site_packages=False,
         requirements=REQUIREMENTS[0],
-)
+    )
 
-start >> extract2 >> end
+    icebreaking = PythonVirtualenvOperator(
+        task_id = 'icebreaking',
+        python_callable = icebreak,
+        system_site_packages = False,
+        requirements = REQUIREMENTS[0],
+        trigger_rule = 'all_done'
+    )
+
+start >> extract2 >> icebreaking >> end
