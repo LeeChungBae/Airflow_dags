@@ -2,7 +2,7 @@
 
 PLAYDATA 데이터엔지니어링 부트캠프 32기 팀 프로젝트 1팀 LeeChungBae의 airflow 전용 DAG (Directed Acyclic Graph) 레포지토리 입니다.
 
-# Installation
+## Installation
 
 다음 코드를 통해 레포지토리를 clone 합니다.
 ```bash
@@ -22,12 +22,16 @@ dags_folder = <PATH>
 ```
 이후, `airflow standalone` 으로 에어플로우 서버를 재시작할 시 DAG들은 해당 레포지토리에서부터 읽어지게 됩니다.
 
-# DAGs 별 기능
-## `extract1`, `extract2`, `extract3`
-todo
+## DAGs 별 기능
+- `extract1.py`
+- `extract2.py`
+- `extract3.py`
 
-## `transform1`, `transform2`, `transform3`
-todo
+ 
+- `transform1.py`
+- `transform2.py`
+- `transform3.py`
 
-## `load1`, `load2`, `load3`
-todo
+- `load1.py`
+- `load2.py`
+- `load3.py`
