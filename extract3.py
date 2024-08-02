@@ -1,4 +1,4 @@
-# extract.py DAGS
+# extract3.py DAGS
 
 from datetime import datetime, timedelta
 from textwrap import dedent
@@ -15,7 +15,7 @@ from airflow.operators.python import (
     is_venv_installed,
 )
 with DAG(
-        'extract1',
+        'extract3',
     default_args={
         'depends_on_past': False,
         'retries': 1,
@@ -31,8 +31,6 @@ with DAG(
     start = EmptyOperator(task_id = 'start')
     end = EmptyOperator(task_id = 'end')
 
-    extract1 = EmptyOperator(task_id = 'extract1')
+    extract3 = EmptyOperator(task_id = 'extract3')
 
-    collect = EmptyOperator(task_id = 'collect')
-
-start >> extract1 >> end
+start >> extract3 >> end

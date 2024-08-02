@@ -1,4 +1,4 @@
-# extract.py DAGS
+# extract1.py DAGS
 
 from datetime import datetime, timedelta
 from textwrap import dedent
@@ -32,7 +32,5 @@ with DAG(
     end = EmptyOperator(task_id = 'end')
 
     extract1 = EmptyOperator(task_id = 'extract1')
-
-    collect = EmptyOperator(task_id = 'collect')
 
 start >> extract1 >> end
