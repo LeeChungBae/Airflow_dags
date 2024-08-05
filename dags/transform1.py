@@ -37,7 +37,7 @@ with DAG(
 
     # functions
     def transform1(**kwargs):
-        from transform_package.transform1 import col_drop, str_to_num
+        from transform_package.transform import col_drop, str_to_num
         ds_nodash = kwargs['ds_nodash']
         trans_path = kwargs['trans_path']
         
