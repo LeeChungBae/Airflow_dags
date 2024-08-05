@@ -9,11 +9,7 @@ PLAYDATA 데이터엔지니어링 부트캠프 32기 팀 LeeChungBae의 airflow 
 - **데이터 정제**: 수집된 박스오피스 데이터에서 불필요한 정보를 제거하고, 누락된 데이터를 처리합니다.
 - **데이터 변환**: 정제된 데이터를 분석 및 시각화에 적합한 형식으로 변환합니다.
 - **데이터 구조화**: 변환된 데이터를 데이터베이스에 저장하거나 다른 시스템으로 전송할 수 있도록 구조화합니다.
-
-## dev/1.0.0
-본 브랜치는 현재 `extract1.py`, `extract2.py`, `extract3.py`의 `ice_breaking()` 기능만 구현되어 있습니다.
-
-다른 기능들은 추후 개발 및 릴리스 때 구현될 예정입니다.
+- 
 
 ## Installation
 다음 코드를 통해 레포지토리를 clone 합니다.
@@ -38,6 +34,7 @@ dags_folder = <PATH>
 본 DAG 들은 에어플로우 서버에 저장된 환경변수를 통해 데이터를 저장하고 불러올 위치를 지정하고 있습니다. 해당 변수들은 다음과 같습니다.
 
 - `EXTRACT_PATH` : `extract` DAG를 통해 불러온 데이터를 저장할 디렉토리의 절대경로입니다. `/home/<USER>/db/extract_path` 등의 형태로 지정해주시면 됩니다.
+![image](https://github.com/user-attachments/assets/5c64f4ba-9aa6-48af-b3ad-5d8d82f2833c)
 
 - `TRANSFORM_PATH` : `transform` DAG를 통해 정제한 데이터를 저장할 디렉토리의 절대경로입니다. `/home/<USER>db/transform_path` 등의 형태로 지정해주시면 됩니다.
 
