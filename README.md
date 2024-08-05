@@ -16,7 +16,6 @@ PLAYDATA 데이터엔지니어링 부트캠프 32기 팀 LeeChungBae의 airflow 
 다른 기능들은 추후 개발 및 릴리스 때 구현될 예정입니다.
 
 ## Installation
-
 다음 코드를 통해 레포지토리를 clone 합니다.
 ```bash
 $ git clone git@github.com:LeeChungBae/Airflow_dags.git
@@ -34,6 +33,15 @@ $ pwd
 dags_folder = <PATH>
 ```
 이후, `airflow standalone` 으로 에어플로우 서버를 재시작할 시 DAG들은 해당 레포지토리에서부터 읽어지게 됩니다.
+
+## Variable Setting
+본 DAG 들은 에어플로우 서버에 저장된 환경변수를 통해 데이터를 저장하고 불러올 위치를 지정하고 있습니다. 해당 변수들은 다음과 같습니다.
+
+- `EXTRACT_PATH` : `extract` DAG를 통해 불러온 데이터를 저장할 디렉토리의 절대경로입니다. `/home/<USER>/db/extract_path` 등의 형태로 지정해주시면 됩니다.
+
+- `TRANSFORM_PATH` : `transform` DAG를 통해 정제한 데이터를 저장할 디렉토리의 절대경로입니다. `/home/<USER>db/transform_path` 등의 형태로 지정해주시면 됩니다.
+
+- `LOAD_PATH`: `load` DAG를 통해 최종적으로 데이터 뱅크에 들어갈 준비가 된 데이터를 저장할 디렉토리의 절대경로입니다. `/home/<USER>/db/load_path` 등의 형태로 지정해주시면 됩니다.
 
 ## DAGs 별 기능
 - `extract1.py`, `extract2.py`, `extract3.py`
