@@ -35,14 +35,13 @@ dags_folder = <PATH>
 
 이 변수들은 에어플로우 서버에서의 중앙 메뉴창에서  `Admin` - `Variables`를 통해 들어가 생성 및 변경할 수 있으며, 
 
-![image](https://github.com/user-attachments/assets/0a0265ab-73f0-49b8-b029-966c8747637b)
+![image](https://github.com/user-attachments/assets/f7007910-9d6a-4670-bc5d-7e692586e8bc)
 
+![image](https://github.com/user-attachments/assets/ae856be9-70b7-477c-93f3-31488c60698a)
 
 본 패키지에서 요구하는 변수들은 다음과 같습니다.
 
 - `EXTRACT_PATH` : `extract` DAG를 통해 불러온 데이터를 저장할 디렉토리의 절대경로입니다. `/home/<USER>/db/extract_path` 등의 형태로 지정해주시면 됩니다.
-
-![image](https://github.com/user-attachments/assets/5c64f4ba-9aa6-48af-b3ad-5d8d82f2833c)
 
 - `TRANSFORM_PATH` : `transform` DAG를 통해 정제한 데이터를 저장할 디렉토리의 절대경로입니다. `/home/<USER>db/transform_path` 등의 형태로 지정해주시면 됩니다.
 
