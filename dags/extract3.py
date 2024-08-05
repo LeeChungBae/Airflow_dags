@@ -74,8 +74,8 @@ with DAG(
     rm_dir = BashOperator(
         task_id='rm_dir',
         bash_command='''
-            echo "{{ var.value.TP_PATH }}/extract_result"
-            EXTR_PATH={{ var.value.TP_PATH }}/extract_result
+            echo "{{ var.value.TP_PATH }}/extract_path"
+            EXTR_PATH={{ var.value.TP_PATH }}/extract_path
             rm -rf $EXTR_PATH/load_dt={{ds_nodash}}
         '''
     )
@@ -83,7 +83,7 @@ with DAG(
     extract3 = PythonVirtualenvOperator(
         task_id = 'extract3',
         python_callable=extract,
-        op_kwargs = { 'PARQ_PATH': "{{var.value.TP_PATH}}/extract_result" },
+        op_kwargs = { 'PARQ_PATH': "{{var.value.TP_PATH}}/extract_path" },
         requirements=REQUIREMENTS[0],
         system_site_packages=False,
     )
