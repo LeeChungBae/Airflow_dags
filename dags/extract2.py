@@ -15,7 +15,7 @@ from airflow.operators.python import (
     is_venv_installed,
 )
 REQUIREMENTS = [
-        "git+https://github.com/LeeChungBae/Extract_package.git@dev/d2.0.0-joo",
+        "git+https://github.com/LeeChungBae/Extract_package.git@dev/d2.0.0",
         "git+https://github.com/LeeChungBae/Transform_package.git@dev/d1.0.0",
         "git+https://github.com/LeeChungBae/Load_package.git@dev/d1.0.0"
 ]
