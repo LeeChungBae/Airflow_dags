@@ -21,7 +21,7 @@ REQUIREMENTS = [
 ]
 
 with DAG(
-        'extract1',
+        'transform1',
     default_args={
         'depends_on_past': False,
         'retries': 1,
