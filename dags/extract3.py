@@ -2,7 +2,6 @@
 
 from datetime import datetime, timedelta
 from textwrap import dedent
-from pprint import pprint
 
 from airflow import DAG
 from airflow.operators.bash import BashOperator
@@ -15,10 +14,11 @@ from airflow.operators.python import (
     is_venv_installed,
 )
 
+
 REQUIREMENTS = [
-    "git+https://github.com/LeeChungBae/Extract_package.git@dev/d1.0.0",
-    "git+https://github.com/LeeChungBae/Load_package.git@dev/d1.0.0",
-    "git+https://github.com/LeeChungBae/Transform_package.git@dev/d1.0.0",
+    "git+https://github.com/LeeChungBae/Extract_package.git@dev/d2.0.0-sang",
+    "git+https://github.com/LeeChungBae/Load_package.git@dev/d2.0.0-sang",
+    "git+https://github.com/LeeChungBae/Transform_package.git@dev/d2.0.0-sang",
 ]
     
 
@@ -31,25 +31,61 @@ with DAG(
     },
     description='movie DAG',
     schedule="10 2 * * *",
-    start_date=datetime(2024, 8, 1),
+    start_date=datetime(2023, 9, 1),
+    end_date=datetime(2023,9,5),
     catchup=True,
     tags=['api', 'movie', 'amt'],
 ) as dag:
 
 # func
-    def extract():
-        pass
+    def extract(**kwargs):
+        from extract_package.extract3 import save2df
+        dt = kwargs['ds_nodash']
+        parq_path = kwargs['PARQ_PATH']
+
+        df = save2df(dt)
+        print(df.head(5))
+    
+        df.to_parquet(parq_path , partition_cols=['load_dt'] )
+
 
     def icebreak():
         from  extract_package.ice_breaking import ice_breaking
         ice_breaking()
 
+#    def branch_fun(**kwargs):
+#        ds_nodash = kwargs['ds_nodash']
+#        path =  parq_path = kwargs['PARQ_PATH']
+#        if  parq_path(path):
+#            return "rm_dir"
+#        else:
+#            return "get_start","echo_task"
 # tasks
+
+    start = EmptyOperator(task_id = 'start')
+    end = EmptyOperator(task_id = 'end')
+
+#    branch_op = BranchPythonOperator(
+#        task_id="branch.op",
+#        python_callable=branch_fun,
+#        op_kwargs = { 'PARQ_PATH': "{{var.value.TP_PATH}}/extract_path" }, 
+#    )
+
+    rm_dir = BashOperator(
+        task_id='rm_dir',
+        bash_command='''
+            echo "{{ var.value.TP_PATH }}/extract_result"
+            EXTR_PATH={{ var.value.TP_PATH }}/extract_result
+            rm -rf $EXTR_PATH/load_dt={{ds_nodash}}
+        '''
+    )
+
     extract3 = PythonVirtualenvOperator(
-         task_id = 'extract3',
-         python_callable=extract,
-         requirements=REQUIREMENTS[0],
-         system_site_packages=False,
+        task_id = 'extract3',
+        python_callable=extract,
+        op_kwargs = { 'PARQ_PATH': "{{var.value.TP_PATH}}/extract_result" },
+        requirements=REQUIREMENTS[0],
+        system_site_packages=False,
     )
 
     icebreaking = PythonVirtualenvOperator(
@@ -59,7 +95,4 @@ with DAG(
          system_site_packages=False,
     )
 
-    start = EmptyOperator(task_id = 'start')
-    end = EmptyOperator(task_id = 'end')
-
-    start >> extract3 >> icebreaking >> end
+    start >> rm_dir >>  extract3 >> icebreaking >> end
