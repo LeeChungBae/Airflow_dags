@@ -40,7 +40,9 @@ dags_folder = <PATH>
 본 패키지에서 요구하는 변수들은 다음과 같습니다.
 - `TP_PATH`: 각 DAGs에서 처리한 데이터를 저장하는 위치의 절대경로입니다. 해당 디렉토리가 없을 경우 새로이 형성되며, `/home/<USER>/<YOUR_PATH>` 같은 식으로 설정해주시면 됩니다. 각 DAGs들은 해당 경로에 하위폴더를 생성해 각각 데이터를 저장하게 됩니다.
 
-![image](https://github.com/user-attachments/assets/ae856be9-70b7-477c-93f3-31488c60698a)
+예시는 다음과 같습니다. `<USER>` 와 `<YOUR_PATH>`는 각각 직접 해당하는 이용자명/경로를 지정해주시면 됩니다.
+
+![image](https://github.com/user-attachments/assets/9e81de4f-51c0-4298-bc42-f02e98e601e6)
 
 
 ## DAGs 별 기능
