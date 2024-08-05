@@ -43,10 +43,8 @@ dags_folder = <PATH>/dags
 ```bash
 $ airflow variables set TP_PATH "/home/<USER>/<YOUR_PATH>"
 
-$ airflow variables list
-# other variables...
-TP_PATH
-# other variables...
+# Airflow Message
+Variable TP_PATH created
 ```
 
 
