@@ -21,7 +21,7 @@ $ git clone git@github.com:LeeChungBae/Airflow_dags.git
 $ cd <CLONED_REPOSITORY>
 $ pwd
 ```
-이 때 출력된 해당 절대 경로를 `<PATH>` 라 할 때, `AIRFLOW HOME` 디렉토리의 `airflow.cfg` 파일의 `dags_folder` 값을  다음과 같이 수정합니다.
+이 때 출력된 해당 절대 경로를 `<PATH>` 라 할 때, `AIRFLOW HOME` 디렉토리의 `airflow.cfg` 파일의 `dags_folder` 값이 다음과 같이 출력되도록 수정합니다.
 ```bash
 $ cat airflow.cfg | grep dags_folder
 dags_folder = <PATH>
