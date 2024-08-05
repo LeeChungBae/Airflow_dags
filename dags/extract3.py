@@ -71,7 +71,7 @@ with DAG(
         task_id = 'extract3',
         python_callable=extract,
         op_kwargs = { 'PARQ_PATH': "{{var.value.TP_PATH}}/extract_path" },
-        requirements=REQUIREMENT,
+        requirements=REQUIREMENTS,
         system_site_packages=False,
     )
 

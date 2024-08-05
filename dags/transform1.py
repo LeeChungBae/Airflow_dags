@@ -25,7 +25,7 @@ with DAG(
         'transform1',
     default_args={
         'depends_on_past': False,
-        'retries': 1,
+        'retries': 0,
         'retry_delay': timedelta(seconds=3)
     },
     description='movie DAG',
@@ -40,11 +40,12 @@ with DAG(
     def transform1(**kwargs):
         from transform_package.transform import col_drop, str_to_num
         ds_nodash = kwargs['ds_nodash']
-        trans_path = kwargs['trans_path']
-        
-        df = col_drop(ds_nodash, trans_path)
-        num_df = str_to_num(trans_path, df)
-        print(num_df.head(5))
+        extr_path = kwargs['extr_path']
+        trans_path = kwargs['trans_path'] 
+        load_dt = kwargs['ds_nodash']
+     
+        df = col_drop(ds_nodash, extr_path)
+        num_df = str_to_num(df=df, path=trans_path, load_dt=load_dt)
 
     # tasks
     # wrapper EmptyOperators
@@ -75,7 +76,10 @@ with DAG(
     transform1 = PythonVirtualenvOperator(
         task_id = 'transform1',
         python_callable = transform1,
-        op_kwargs = { 'trans_path' : "{{var.value.TP_PATH}}/transform_path" },
+        op_kwargs = {
+            'extr_path' : "{{var.value.TP_PATH}}/extract_path", 
+            'trans_path' : "{{var.value.TP_PATH}}/transform_path" 
+        },
         system_site_packages = False,
         requirements = REQUIREMENTS,
         trigger_rule = "all_success"
