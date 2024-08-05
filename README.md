@@ -24,23 +24,30 @@ $ pwd
 이 때 출력된 해당 절대 경로를 `<PATH>` 라 할 때, `AIRFLOW HOME` 디렉토리의 `airflow.cfg` 파일의 `dags_folder` 값이 다음과 같이 출력되도록 수정합니다.
 ```bash
 $ cat airflow.cfg | grep dags_folder
-dags_folder = <PATH>
+dags_folder = <PATH>/dags
 ```
-이후, `airflow standalone` 으로 에어플로우 서버를 재시작할 시 DAG들은 해당 레포지토리에서부터 읽어지게 됩니다.
+이후, `airflow standalone` 으로 에어플로우 서버를 재시작할 시 DAG들은 <PATH>/dags 레포지토리에서부터 읽어지게 됩니다.
 
 ## Variable Setting
 본 DAG 들은 에어플로우 서버에 저장된 환경변수를 통해 데이터를 저장하고 불러올 위치를 지정하고 있습니다. 
 
-이 변수들은 에어플로우 서버에서의 중앙 메뉴창에서  `Admin` - `Variables`를 통해 들어가 생성 및 변경할 수 있으며, 
+이 패키지에서 요구하는 변수는 다음과 같습니다.
+- `TP_PATH`: 각 DAGs에서 처리한 데이터를 저장하는 위치의 절대경로입니다. 해당 디렉토리가 없을 경우 새로이 형성되며, `/home/<USER>/<YOUR_PATH>` 같은 식으로 설정해주시면 됩니다. 각 DAGs들은 해당 경로에 하위폴더를 생성해 각각 데이터를 저장하게 됩니다.
+
+이 변수는 에어플로우 웹서버에서 관리자 권한을 통해 중앙 메뉴창의  `Admin` - `Variables`를 통해 들어가 생성 및 변경할 수 있으며, 
 
 ![image](https://github.com/user-attachments/assets/f7007910-9d6a-4670-bc5d-7e692586e8bc)
 
-본 패키지에서 요구하는 변수들은 다음과 같습니다.
-- `TP_PATH`: 각 DAGs에서 처리한 데이터를 저장하는 위치의 절대경로입니다. 해당 디렉토리가 없을 경우 새로이 형성되며, `/home/<USER>/<YOUR_PATH>` 같은 식으로 설정해주시면 됩니다. 각 DAGs들은 해당 경로에 하위폴더를 생성해 각각 데이터를 저장하게 됩니다.
+혹은 다음과 같은 셸 커맨드로도  설정할 수 있습니다. 
 
-예시는 다음과 같습니다. `<USER>` 와 `<YOUR_PATH>`는 각각 직접 해당하는 이용자명/경로를 지정해주시면 됩니다.
+```bash
+$ airflow variables set TP_PATH "/home/<USER>/<YOUR_PATH>"
 
-![image](https://github.com/user-attachments/assets/9e81de4f-51c0-4298-bc42-f02e98e601e6)
+$ airflow variables list
+# other variables...
+TP_PATH
+# other variables...
+```
 
 
 ## DAGs 별 기능
