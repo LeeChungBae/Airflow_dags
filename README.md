@@ -8,8 +8,7 @@ PLAYDATA 데이터엔지니어링 부트캠프 32기 팀 LeeChungBae의 airflow 
 
 - **데이터 정제**: 수집된 박스오피스 데이터에서 불필요한 정보를 제거하고, 누락된 데이터를 처리합니다.
 - **데이터 변환**: 정제된 데이터를 분석 및 시각화에 적합한 형식으로 변환합니다.
-- **데이터 구조화**: 변환된 데이터를 데이터베이스에 저장하거나 다른 시스템으로 전송할 수 있도록 구조화합니다.
-- 
+- **데이터 구조화**: 변환된 데이터를 데이터베이스에 저장하거나 다른 시스템으로 전송할 수 있도록 구조화합니다. 
 
 ## Installation
 다음 코드를 통해 레포지토리를 clone 합니다.
@@ -24,8 +23,7 @@ $ pwd
 ```
 이 때 출력된 해당 절대 경로를 `<PATH>` 라 할 때, `AIRFLOW HOME` 디렉토리의 `airflow.cfg` 파일의 `dags_folder` 값을  다음과 같이 수정합니다.
 ```bash
-# Variable: AIRFLOW__CORE__DAGS_FOLDER
-#
+$ cat airflow.cfg | grep dags_folder
 dags_folder = <PATH>
 ```
 이후, `airflow standalone` 으로 에어플로우 서버를 재시작할 시 DAG들은 해당 레포지토리에서부터 읽어지게 됩니다.
