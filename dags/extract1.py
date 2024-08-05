@@ -61,7 +61,7 @@ with DAG(
     parq_path = BashOperator(
         task_id = "parq_path",
         bash_command='''
-            EXTR_PATH={{ var.value.EXTRACT_PATH }}
+            EXTR_PATH={{ var.value.TP_PATH }}/extract_path
             echo "checking EXTRACT_PATH $EXTR_PATH..."
             if [[ -d "$EXTR_PATH/load_dt={{ds_nodash}}" ]]; then
                 echo "rm -rf $EXT_PATH"
