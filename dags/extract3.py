@@ -33,11 +33,7 @@ with DAG(
     description='movie DAG',
     schedule="10 2 * * *",
     start_date=datetime(2023, 9, 1),
-<<<<<<< HEAD
-    end_date=datetime(2024, 12, 31),
-=======
     end_date=datetime(2024, 1, 1),
->>>>>>> dev/d2.0.0-say-transfrom
     catchup=True,
     tags=['api', 'movie', 'amt'],
 ) as dag:
