@@ -78,7 +78,7 @@ with DAG(
     icebreaking = PythonVirtualenvOperator(
          task_id = 'icebreaking',
          python_callable=icebreak,
-         requirements=REQUIREMENTS[0],
+         requirements=REQUIREMENTS,
          system_site_packages=False,
     )
 

@@ -90,7 +90,7 @@ with DAG(
         task_id = 'icebreaking',
         python_callable = icebreak,
         system_site_packages = False,
-        requirements = REQUIREMENTS[0],
+        requirements = REQUIREMENTS,
         trigger_rule = 'all_done'
     )
 
