@@ -14,12 +14,13 @@ from airflow.operators.python import (
     is_venv_installed,
 )
 
+REQUIREMENTS = "git+https://github.com/LeeChungBae/Extract_package.git@dev/d2.0.0"
 
-REQUIREMENTS = [
-    "git+https://github.com/LeeChungBae/Extract_package.git@dev/d2.0.0",
-    "git+https://github.com/LeeChungBae/Load_package.git@dev/d2.0.0-sang",
-    "git+https://github.com/LeeChungBae/Transform_package.git@dev/d2.0.0-sang",
-]
+#REQUIREMENTS = [
+#    "git+https://github.com/LeeChungBae/Extract_package.git@dev/d2.0.0",
+#    "git+https://github.com/LeeChungBae/Load_package.git@dev/d2.0.0-sang",
+#    "git+https://github.com/LeeChungBae/Transform_package.git@dev/d2.0.0-sang",
+#]
     
 
 with DAG(
@@ -37,7 +38,7 @@ with DAG(
     tags=['api', 'movie', 'amt'],
 ) as dag:
 
-# func
+    # func
     def extract(**kwargs):
         from extract_package.extract3 import save2df
         dt = kwargs['ds_nodash']
@@ -52,24 +53,10 @@ with DAG(
     def icebreak():
         from  extract_package.ice_breaking import ice_breaking
         ice_breaking()
-
-#    def branch_fun(**kwargs):
-#        ds_nodash = kwargs['ds_nodash']
-#        path =  parq_path = kwargs['PARQ_PATH']
-#        if  parq_path(path):
-#            return "rm_dir"
-#        else:
-#            return "get_start","echo_task"
-# tasks
-
+    
+    # task
     start = EmptyOperator(task_id = 'start')
     end = EmptyOperator(task_id = 'end')
-
-#    branch_op = BranchPythonOperator(
-#        task_id="branch.op",
-#        python_callable=branch_fun,
-#        op_kwargs = { 'PARQ_PATH': "{{var.value.TP_PATH}}/extract_path" }, 
-#    )
 
     rm_dir = BashOperator(
         task_id='rm_dir',
@@ -84,7 +71,7 @@ with DAG(
         task_id = 'extract3',
         python_callable=extract,
         op_kwargs = { 'PARQ_PATH': "{{var.value.TP_PATH}}/extract_path" },
-        requirements=REQUIREMENTS[0],
+        requirements=REQUIREMENT,
         system_site_packages=False,
     )
 

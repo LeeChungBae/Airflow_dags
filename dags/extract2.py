@@ -14,11 +14,13 @@ from airflow.operators.python import (
     BranchPythonOperator,
     is_venv_installed,
 )
-REQUIREMENTS = [
-        "git+https://github.com/LeeChungBae/Extract_package.git@dev/d2.0.0",
-        "git+https://github.com/LeeChungBae/Transform_package.git@dev/d1.0.0",
-        "git+https://github.com/LeeChungBae/Load_package.git@dev/d1.0.0"
-]
+
+REQUIREMENTS = "git+https://github.com/LeeChungBae/Extract_package.git@dev/d2.0.0"
+#REQUIREMENTS = [
+#        "git+https://github.com/LeeChungBae/Extract_package.git@dev/d2.0.0",
+#        "git+https://github.com/LeeChungBae/Transform_package.git@dev/d1.0.0",
+#        "git+https://github.com/LeeChungBae/Load_package.git@dev/d1.0.0"
+#]
 with DAG(
         'extract2',
     default_args={
@@ -72,7 +74,7 @@ with DAG(
         python_callable = extract2,
         op_kwargs={'parq_path': "{{var.value.TP_PATH}}/extract_path"},
         system_site_packages=False,
-        requirements=REQUIREMENTS[0],
+        requirements=REQUIREMENTS,
         trigger_rule = "all_success"
     )
 

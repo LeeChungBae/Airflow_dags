@@ -14,11 +14,12 @@ from airflow.operators.python import (
     is_venv_installed,
 )
 
-REQUIREMENTS = [
-    "git+https://github.com/LeeChungBae/Extract_package.git@dev/d2.0.0",
-    "git+https://github.com/LeeChungBae/Transform_package.git@dev/d2.0.0-say",
-    "git+https://github.com/LeeChungBae/Load_package.git@dev/d1.0.0"
-]
+REQUIREMENTS = "git+https://github.com/LeeChungBae/Transform_package.git@dev/d2.0.0-say"
+#[
+#    "git+https://github.com/LeeChungBae/Extract_package.git@dev/d2.0.0",
+#    "git+https://github.com/LeeChungBae/Transform_package.git@dev/d2.0.0-say",
+#    "git+https://github.com/LeeChungBae/Load_package.git@dev/d1.0.0"
+#]
 
 with DAG(
         'transform1',
@@ -76,7 +77,7 @@ with DAG(
         python_callable = transform1,
         op_kwargs = { 'trans_path' : "{{var.value.TP_PATH}}/transform_path" },
         system_site_packages = False,
-        requirements = REQUIREMENTS[1],
+        requirements = REQUIREMENTS,
         trigger_rule = "all_success"
     )
 
