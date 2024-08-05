@@ -56,8 +56,7 @@ with DAG(
     end = EmptyOperator(task_id = 'end')
 
     # idempotency Bash Operators
-
-    # extract_path location stored in airflow variable <EXTRACT_PATH>
+    # uses airflow variable <TP_PATH>
     parq_path = BashOperator(
         task_id = "parq_path",
         bash_command='''
@@ -80,7 +79,7 @@ with DAG(
     extract1 = PythonVirtualenvOperator(
         task_id = 'extract1',
         python_callable = extract1,
-        op_kwargs = { 'parq_path' : "{{var.value.EXTRACT_PATH}}" },
+        op_kwargs = { 'parq_path' : "{{var.value.TP_PATH}}/extract_path" },
         system_site_packages = False,
         requirements = REQUIREMENTS[0],
         trigger_rule = "all_success"
