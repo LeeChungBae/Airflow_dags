@@ -29,7 +29,7 @@ with DAG(
     description='movie DAG',
     schedule="10 2 * * *",
     start_date=datetime(2023, 5, 1),
-    end_date=datetime(2023, 5, 3),
+    end_date=datetime(2023, 8, 31),
     catchup=True,
     tags=['api', 'movie', 'amt'],
 ) as dag:
