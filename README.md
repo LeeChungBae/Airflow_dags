@@ -33,7 +33,12 @@ dags_folder = <PATH>
 ## Variable Setting
 본 DAG 들은 에어플로우 서버에 저장된 환경변수를 통해 데이터를 저장하고 불러올 위치를 지정하고 있습니다. 
 
-이 변수들은 에어플로우 서버에서의 중앙 메뉴창에서  `Admin` - `Variables`를 통해 들어가 생성 및 변경할 수 있으며, 본 패키지에서 요구하는 변수들은 다음과 같습니다.
+이 변수들은 에어플로우 서버에서의 중앙 메뉴창에서  `Admin` - `Variables`를 통해 들어가 생성 및 변경할 수 있으며, 
+
+![image](https://github.com/user-attachments/assets/0a0265ab-73f0-49b8-b029-966c8747637b)
+
+
+본 패키지에서 요구하는 변수들은 다음과 같습니다.
 
 - `EXTRACT_PATH` : `extract` DAG를 통해 불러온 데이터를 저장할 디렉토리의 절대경로입니다. `/home/<USER>/db/extract_path` 등의 형태로 지정해주시면 됩니다.
 
