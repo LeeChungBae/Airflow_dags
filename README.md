@@ -37,15 +37,11 @@ dags_folder = <PATH>
 
 ![image](https://github.com/user-attachments/assets/f7007910-9d6a-4670-bc5d-7e692586e8bc)
 
+본 패키지에서 요구하는 변수들은 다음과 같습니다.
+- `TP_PATH`: 각 DAGs에서 처리한 데이터를 저장하는 위치의 절대경로입니다. 해당 디렉토리가 없을 경우 새로이 형성되며, `/home/<USER>/<YOUR_PATH>` 같은 식으로 설정해주시면 됩니다. 각 DAGs들은 해당 경로에 하위폴더를 생성해 각각 데이터를 저장하게 됩니다.
+
 ![image](https://github.com/user-attachments/assets/ae856be9-70b7-477c-93f3-31488c60698a)
 
-본 패키지에서 요구하는 변수들은 다음과 같습니다.
-
-- `EXTRACT_PATH` : `extract` DAG를 통해 불러온 데이터를 저장할 디렉토리의 절대경로입니다. `/home/<USER>/db/extract_path` 등의 형태로 지정해주시면 됩니다.
-
-- `TRANSFORM_PATH` : `transform` DAG를 통해 정제한 데이터를 저장할 디렉토리의 절대경로입니다. `/home/<USER>db/transform_path` 등의 형태로 지정해주시면 됩니다.
-
-- `LOAD_PATH`: `load` DAG를 통해 최종적으로 데이터 뱅크에 들어갈 준비가 된 데이터를 저장할 디렉토리의 절대경로입니다. `/home/<USER>/db/load_path` 등의 형태로 지정해주시면 됩니다.
 
 ## DAGs 별 기능
 - `extract1.py`, `extract2.py`, `extract3.py`
